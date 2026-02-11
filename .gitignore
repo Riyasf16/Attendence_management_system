@@ -1,0 +1,21 @@
+# Ignore config file with database credentials
+config.php
+
+# Ignore test and fix scripts (not needed in production)
+test_db.php
+import_db.php
+fix_passwords.php
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore backup files
+*.bak
+*~
