@@ -47,8 +47,33 @@ body {
     line-height: 1.6;
     font-size: 15px;
     min-height: 100vh;
-    display: flex;
     flex-direction: column;
+}
+
+body.landing-page {
+    background-image: url('Collage.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* Optional: Add a tint if needed, but cards have white bg */
+    background-color: var(--bg-body);
+}
+
+body.teacher-login {
+    background-image: url('Campus.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+body.student-login {
+    background-image: url('Student.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 /* ===========================

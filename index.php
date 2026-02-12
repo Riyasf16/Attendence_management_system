@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="landing-page">
 
     <header class="college-header">
         <div class="header-content">
@@ -22,11 +22,8 @@
         </div>
     </header>
 
-    <div class="container landing-wrapper" style="flex-direction: column; justify-content: flex-start; padding-top: 40px;">
+    <div class="container landing-wrapper" style="flex-direction: column; justify-content: center; padding-top: 40px;">
         
-        <div class="hero-section">
-            <img src="Collage.png" alt="College Campus Collage" class="hero-collage">
-        </div>
         <div class="portal-grid">
             <a href="teacher_login.php" class="portal-card">
                 <div class="portal-title" style="font-size: 40px;">👨‍🏫</div>
