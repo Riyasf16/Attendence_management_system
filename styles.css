@@ -1,30 +1,37 @@
-/* ===========================
-   Modern UI - Design System
-   =========================== */
+/* =========================================
+   Karpagam College of Arts and Science
+   Attendance Management System - Stylesheet
+   ========================================= */
+
 :root {
-    /* Color Palette */
-    --primary: #4f46e5;
-    --primary-dark: #4338ca;
-    --secondary: #ec4899;
-    --accent: #8b5cf6;
-    --background: #f3f4f6;
-    --card-bg: #ffffff;
-    --text-main: #1f2937;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
+    /* College Color Palette */
+    --primary: #003366;
+    /* Deep Academic Blue */
+    --primary-light: #004d99;
+    /* Lighter Blue for hover */
+    --accent: #0066cc;
+    /* Bright Blue for interactions */
+    --text-main: #333333;
+    /* Formal Dark Grey */
+    --text-light: #666666;
+    /* Secondary Text */
+    --bg-body: #f4f6f9;
+    /* Light Blue-Grey Background */
+    --bg-card: #ffffff;
+    /* White Container */
+    --border: #dcdcdc;
+    /* Subtle Border */
+    --white: #ffffff;
 
     /* Status Colors */
-    --success-bg: #d1fae5;
-    --success-text: #065f46;
-    --danger-bg: #fee2e2;
-    --danger-text: #991b1b;
-    --warning-bg: #fef3c7;
-    --warning-text: #92400e;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
 
     /* Spacing & Radius */
-    --radius: 12px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -34,11 +41,37 @@
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--background);
+    font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
     color: var(--text-main);
-    line-height: 1.5;
+    line-height: 1.6;
+    font-size: 15px;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===========================
+   Global Typography
+   =========================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* ===========================
@@ -47,339 +80,405 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 20px;
+    flex: 1;
+    /* Push footer down */
 }
 
 /* ===========================
-   Navigation
+   Header & Branding
+   =========================== */
+/* ===========================
+   Header & Branding
+   =========================== */
+.college-header {
+    background: var(--white);
+    border-bottom: 4px solid var(--primary);
+    padding: 15px 0;
+    box-shadow: var(--shadow);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.college-logo {
+    height: 60px;
+    width: auto;
+}
+
+.brand-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.college-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dept-name {
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 500;
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.system-title {
+    font-size: 16px;
+    color: var(--text-main);
+    font-weight: 600;
+    background: #eef2f7;
+    padding: 8px 15px;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent);
+}
+
+/* Hero Section with Collage */
+.hero-section {
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.hero-collage {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.login-logo {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 150px;
+    height: auto;
+}
+
+/* ===========================
+   Navigation Bar
    =========================== */
 .navbar {
-    background: white;
-    box-shadow: var(--shadow);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    background: var(--primary);
+    color: var(--white);
+    padding: 10px 0;
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.navbar h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+.user-welcome {
+    font-size: 14px;
+    opacity: 0.9;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.user-name {
-    font-weight: 500;
-    color: var(--text-main);
-}
-
-/* ===========================
-   Cards & Dashboard
-   =========================== */
-.card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    margin-bottom: 2rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-    box-shadow: var(--shadow-lg);
-}
-
-.student-header {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    padding: 2.5rem;
-    border-radius: var(--radius);
-    margin-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.student-header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 45%, transparent 50%);
-    pointer-events: none;
-}
-
-.student-info {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-
-.info-badge {
+.logout-btn {
     background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    color: var(--white);
+    padding: 5px 15px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
     border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
 }
 
 /* ===========================
-   Overall Stats
+   Landing Page (Index)
    =========================== */
-.overall-section {
-    text-align: center;
-    padding: 2rem;
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 2rem;
-    border: 1px solid var(--border);
-}
-
-.overall-percentage {
-    font-size: 3.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin: 0.5rem 0;
-}
-
-/* ===========================
-   Subject Cards
-   =========================== */
-.subject-card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    border: 1px solid var(--border);
-    margin-bottom: 1rem;
-    transition: all 0.2s ease;
-}
-
-.subject-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow);
-}
-
-.subject-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.subject-name {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-
-.percentage-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.landing-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    color: white;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 80vh;
 }
 
-.percentage-good {
-    background: linear-gradient(135deg, #10b981, #059669);
+.portal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
 }
 
-.percentage-medium {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+.portal-card {
+    background: var(--bg-card);
+    border-top: 5px solid var(--primary);
+    /* Blue Top Border */
+    padding: 40px;
+    text-align: center;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
 }
 
-.percentage-low {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+.portal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.attendance-detail {
-    display: flex;
-    gap: 1.5rem;
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
+.portal-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-main);
 }
 
 /* ===========================
-   Attendance Table
+   Login Container
    =========================== */
-.attendance-table-wrapper {
-    /* Robust scroll container */
-    display: block;
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.login-box {
+    background: var(--bg-card);
+    padding: 40px;
     width: 100%;
-    margin-top: 1.5rem;
-    max-height: 450px;
-    /* Taller viewport */
-    overflow-y: auto;
+    max-width: 400px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: white;
-    position: relative;
-
-    /* Scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: var(--text-muted) transparent;
 }
 
-.attendance-table-wrapper::-webkit-scrollbar {
-    width: 8px;
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.attendance-table-wrapper::-webkit-scrollbar-track {
-    background: transparent;
+.login-header h2 {
+    font-size: 22px;
 }
 
-.attendance-table-wrapper::-webkit-scrollbar-thumb {
-    background-color: #cbd5e1;
-    border-radius: 20px;
-    border: 3px solid transparent;
-    background-clip: content-box;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.attendance-table-wrapper::-webkit-scrollbar-thumb:hover {
-    background-color: #94a3b8;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.attendance-table {
+.form-control {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 0.9rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
 }
 
-.attendance-table th {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: #f8fafc;
-    color: var(--text-muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    padding: 1rem 1.5rem;
-    border-bottom: 2px solid var(--border);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.attendance-table td {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-main);
-    vertical-align: middle;
-}
-
-.attendance-table tr:last-child td {
-    border-bottom: none;
-}
-
-.attendance-table tbody tr {
-    transition: background-color 0.1s ease;
-}
-
-.attendance-table tbody tr:hover {
-    background-color: #f8fafc;
-}
-
-/* Badges */
-.period-badge {
-    background: #eff6ff;
-    color: #3b82f6;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border: 1px solid #dbeafe;
-}
-
-.status-badge {
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-}
-
-.status-badge.status-present {
-    background: var(--success-bg);
-    color: var(--success-text);
-}
-
-.status-badge.status-absent {
-    background: var(--danger-bg);
-    color: var(--danger-text);
+.form-control:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
 }
 
 /* ===========================
    Buttons
    =========================== */
 .btn {
-    padding: 0.625rem 1.25rem;
-    border-radius: 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
     font-weight: 600;
-    font-size: 0.875rem;
     cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    border: none;
+    text-align: center;
+    width: 100%;
+    transition: background 0.2s;
 }
 
 .btn-primary {
     background: var(--primary);
-    color: white;
-    border: none;
-    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
+    background: var(--primary-light);
+    text-decoration: none;
 }
 
 .btn-secondary {
-    background: white;
+    background: #e9ecef;
     color: var(--text-main);
-    border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-    background: #f9fafb;
-    border-color: var(--text-muted);
+    background: #dee2e6;
+    text-decoration: none;
+}
+
+/* ===========================
+   Dashboard Components
+   =========================== */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.summary-card h3 {
+    font-size: 28px;
+    color: var(--primary);
+    margin-bottom: 0px;
+}
+
+.summary-card p {
+    color: var(--text-light);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===========================
+   Tables
+   =========================== */
+.data-table-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+/* Scrollable Table Wrapper */
+.table-responsive {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th {
+    background: #f8f9fa;
+    color: var(--text-main);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+.table tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-danger {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* ===========================
+   Forms (Attendance Marking)
+   =========================== */
+.selection-form {
+    background: #eef2f7;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.form-row {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.college-footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    background: var(--bg-card);
+}
+
+.college-footer strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 5px;
 }

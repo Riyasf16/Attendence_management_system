@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['attendance'])) {
         $insert_stmt->close();
         $conn->commit();
         
-        $success_message = "Attendance marked successfully for Period $period on " . date('F j, Y', strtotime($date));
+        $success_message = "Attendance marked for Period $period on " . date('F j, Y', strtotime($date));
     } catch (Exception $e) {
         $conn->rollback();
         $error_message = "Error marking attendance: " . $e->getMessage();
@@ -168,115 +168,115 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Attendance - <?php echo htmlspecialchars($subject_name); ?></title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mark Attendance - Karpagam College</title>
+    <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        .subject-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+        .meta-tags {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .meta-tag {
+            background: rgba(0, 51, 102, 0.1);
+            color: #003366;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .action-bar {
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
-        }
-        .subject-header h2 {
-            margin: 0 0 10px 0;
-        }
-        .subject-meta {
+            border: 1px solid #e9ecef;
             display: flex;
-            gap: 20px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
         }
-        .meta-item {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-        }
-        .quick-actions {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-        .quick-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9em;
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        .quick-btn:hover {
-            background: #bbdefb;
+        .quick-actions button {
+            margin-right: 10px;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
+
+    <header class="college-header">
+        <div class="header-content">
+            <div class="brand-details">
+                <span class="college-name">Karpagam College of Arts and Science</span>
+                <span class="dept-name">Department of BSc Computer Science</span>
+            </div>
+            <div class="system-title">Attendance Management System</div>
+        </div>
+    </header>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2>Attendance Management System</h2>
-            <div class="nav-right">
-                <span class="user-name">Welcome, <?php echo htmlspecialchars($teacher_name); ?></span>
-                <a href="logout.php" class="btn btn-secondary">Logout</a>
-            </div>
+            <div class="user-welcome">Welcome, <strong><?php echo htmlspecialchars($teacher_name); ?></strong> (Faculty)</div>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="page-header">
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: start;">
             <div>
-                <h1>Mark Attendance</h1>
-                <p>Period <?php echo $period; ?> - <?php echo htmlspecialchars($subject_name); ?></p>
+                <h1 style="color: #003366; font-size: 24px; margin-bottom: 5px;">Mark Attendance</h1>
+                <p style="color: #666; font-size: 14px;">Period <?php echo $period; ?> • <?php echo htmlspecialchars($subject_name); ?></p>
+                
+                <div class="meta-tags">
+                    <span class="meta-tag">📚 <?php echo htmlspecialchars($subject_code); ?></span>
+                    <span class="meta-tag">🎓 <?php echo htmlspecialchars($course_name); ?></span>
+                    <span class="meta-tag">📖 Sem <?php echo $semester; ?></span>
+                    <span class="meta-tag">👥 <?php echo count($students); ?> Students</span>
+                </div>
             </div>
-            <a href="teacher_dashboard.php" class="btn btn-secondary">← Back to Dashboard</a>
+            <a href="teacher_dashboard.php" class="btn btn-secondary" style="width: auto;">← Back to Dashboard</a>
         </div>
 
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
         <?php if ($success_message): ?>
-            <div class="success-message"><?php echo htmlspecialchars($success_message); ?></div>
+            <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+                ✅ <?php echo htmlspecialchars($success_message); ?>
+            </div>
         <?php endif; ?>
 
         <?php if ($error_message): ?>
-            <div class="error-message"><?php echo htmlspecialchars($error_message); ?></div>
+            <div class="alert alert-danger" style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+                ⚠️ <?php echo htmlspecialchars($error_message); ?>
+            </div>
         <?php endif; ?>
-        
+
         <?php if (!$can_mark_attendance && $time_restriction_message): ?>
-            <div class="error-message" style="background: #fff3cd; color: #856404; border-left: 4px solid #ffc107;">
-                <strong>⏰ Time Restriction</strong><br>
-                <?php echo htmlspecialchars($time_restriction_message); ?><br>
-                <small>Current time: <?php echo date('g:i A'); ?></small>
+            <div class="alert alert-warning" style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #ffeeba;">
+                <strong>⏰ Time Restriction:</strong> <?php echo htmlspecialchars($time_restriction_message); ?>
             </div>
         <?php endif; ?>
 
-        <div class="subject-header">
-            <h2><?php echo htmlspecialchars($subject_name); ?></h2>
-            <div class="subject-meta">
-                <span class="meta-item">📚 Code: <?php echo htmlspecialchars($subject_code); ?></span>
-                <span class="meta-item">🎓 <?php echo htmlspecialchars($course_name); ?></span>
-                <span class="meta-item">📖 Semester <?php echo $semester; ?></span>
-                <span class="meta-item">🕐 Period <?php echo $period; ?></span>
-                <span class="meta-item">👥 <?php echo count($students); ?> Students</span>
-            </div>
-        </div>
+        <div class="data-table-container">
+            <form method="POST" action="">
+                <div class="action-bar">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="date" style="margin-right: 10px; display: inline-block;">Select Date:</label>
+                        <input type="date" id="date" name="date" class="form-control" style="width: auto; display: inline-block;" value="<?php echo $today; ?>" max="<?php echo $today; ?>" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?> required>
+                    </div>
 
-        <div class="card">
-            <form method="POST" action="" class="attendance-form">
-                <div class="form-group">
-                    <label for="date">Select Date:</label>
-                    <input type="date" id="date" name="date" value="<?php echo $today; ?>" max="<?php echo $today; ?>" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?> required>
-                </div>
-
-                <div class="quick-actions">
-                    <button type="button" class="quick-btn" onclick="markAll('present')" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>✓ Mark All Present</button>
-                    <button type="button" class="quick-btn" onclick="markAll('absent')" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>✗ Mark All Absent</button>
+                    <div class="quick-actions">
+                        <button type="button" class="btn btn-secondary" onclick="markAll('present')" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>✓ All Present</button>
+                        <button type="button" class="btn btn-secondary" onclick="markAll('absent')" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>✗ All Absent</button>
+                    </div>
                 </div>
 
                 <?php if (count($students) > 0): ?>
-                    <div class="attendance-table-wrapper">
-                        <table class="attendance-table">
+                    <div class="table-responsive">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Roll Number</th>
+                                    <th>Roll No</th>
                                     <th>Student Name</th>
                                     <th>Status</th>
                                 </tr>
@@ -287,25 +287,25 @@ $conn->close();
                                     $current_status = $existing_attendance[$student['id']] ?? 'present';
                                     ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($student['roll_number']); ?></td>
+                                        <td><strong><?php echo htmlspecialchars($student['roll_number']); ?></strong></td>
                                         <td><?php echo htmlspecialchars($student['name']); ?></td>
                                         <td>
-                                            <div class="radio-group">
-                                                <label class="radio-label">
+                                            <div style="display: flex; gap: 15px;">
+                                                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
                                                     <input type="radio" 
                                                            name="attendance[<?php echo $student['id']; ?>]" 
                                                            value="present" 
                                                            <?php echo $current_status === 'present' ? 'checked' : ''; ?>
                                                            <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>
-                                                    <span class="status-present">Present</span>
+                                                    <span style="color: #28a745; font-weight: 500;">Present</span>
                                                 </label>
-                                                <label class="radio-label">
+                                                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
                                                     <input type="radio" 
                                                            name="attendance[<?php echo $student['id']; ?>]" 
                                                            value="absent"
                                                            <?php echo $current_status === 'absent' ? 'checked' : ''; ?>
                                                            <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>
-                                                    <span class="status-absent">Absent</span>
+                                                    <span style="color: #dc3545; font-weight: 500;">Absent</span>
                                                 </label>
                                             </div>
                                         </td>
@@ -315,17 +315,22 @@ $conn->close();
                         </table>
                     </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-large" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>
-                            <?php echo $can_mark_attendance ? 'Submit Attendance' : '🔒 Attendance Locked (Time Restriction)'; ?>
+                    <div style="margin-top: 20px; text-align: right;">
+                        <button type="submit" class="btn btn-primary" style="width: auto; padding: 12px 30px;" <?php echo !$can_mark_attendance ? 'disabled' : ''; ?>>
+                            <?php echo $can_mark_attendance ? 'Submit Attendance Record' : 'Attendance Locked'; ?>
                         </button>
                     </div>
                 <?php else: ?>
-                    <p class="no-data">No students enrolled in this course and semester.</p>
+                    <p style="text-align: center; padding: 20px; color: #999;">No students enrolled.</p>
                 <?php endif; ?>
             </form>
         </div>
     </div>
+
+    <footer class="college-footer">
+        <strong>© 2026 Karpagam College of Arts and Science</strong>
+        Department of BSc Computer Science | Attendance Management System
+    </footer>
 
     <script>
         function markAll(status) {
@@ -333,5 +338,6 @@ $conn->close();
             radios.forEach(radio => radio.checked = true);
         }
     </script>
+
 </body>
 </html>

@@ -68,179 +68,120 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard - Attendance Management System</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .timetable-card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .timetable-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .period-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .period-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        .time-badge {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .subject-info h3 {
-            margin: 5px 0;
-            color: #333;
-        }
-        .course-badge {
-            display: inline-block;
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            margin-right: 10px;
-        }
-        .student-count {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 8px;
-        }
-        .attendance-status {
-            margin-top: 10px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9em;
-        }
-        .status-marked {
-            background: #c8e6c9;
-            color: #2e7d32;
-        }
-        .status-pending {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-        .day-header {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .no-classes-today {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-        }
-    </style>
+    <title>Teacher Dashboard - Karpagam College</title>
+    <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <header class="college-header">
+        <div class="header-content">
+            <div class="brand-section">
+                <img src="Logo.png" alt="College Logo" class="college-logo">
+                <div class="brand-details">
+                    <span class="college-name">Karpagam College of Arts and Science</span>
+                    <span class="dept-name">Department of BSc Computer Science</span>
+                </div>
+            </div>
+            <div class="system-title">Attendance Management System</div>
+        </div>
+    </header>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2>Attendance Management System</h2>
-            <div class="nav-right">
-                <span class="user-name">Welcome, <?php echo htmlspecialchars($teacher_name); ?></span>
-                <a href="logout.php" class="btn btn-secondary">Logout</a>
-            </div>
+            <div class="user-welcome">Welcome, <strong><?php echo htmlspecialchars($teacher_name); ?></strong> (Faculty)</div>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="dashboard-header">
-            <h1>Teacher Dashboard</h1>
-            <p>Manage your timetable and mark period-wise attendance</p>
+        <div class="dashboard-header" style="margin-top: 20px; margin-bottom: 20px;">
+            <h2>Faculty Dashboard</h2>
+            <p style="color: #666;">Manage your classes and attendance</p>
         </div>
 
         <!-- Statistics Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-content">
-                    <h3><?php echo $stats['total_subjects']; ?></h3>
-                    <p>Subjects Assigned</p>
-                </div>
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3><?php echo $stats['total_subjects']; ?></h3>
+                <p>Subjects Assigned</p>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">👥</div>
-                <div class="stat-content">
-                    <h3><?php echo $stats['total_students']; ?></h3>
-                    <p>Total Students</p>
-                </div>
+            <div class="summary-card">
+                <h3><?php echo $stats['total_students']; ?></h3>
+                <p>Total Students</p>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">✓</div>
-                <div class="stat-content">
-                    <h3><?php echo $stats['total_attendance_records']; ?></h3>
-                    <p>Attendance Records</p>
-                </div>
+            <div class="summary-card">
+                <h3><?php echo $stats['total_attendance_records']; ?></h3>
+                <p>Attendance Marked</p>
             </div>
         </div>
 
         <!-- Today's Timetable -->
-        <div class="card">
-            <div class="day-header">
-                <h2><?php echo $today; ?>'s Schedule</h2>
-                <p><?php echo date('F j, Y'); ?></p>
+        <div class="data-table-container">
+            <div class="header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+                <h3 style="color: #003366; margin: 0;">📅 Today's Schedule (<?php echo $today; ?>, <?php echo date('d M Y'); ?>)</h3>
             </div>
             
             <?php if (count($timetable) > 0): ?>
-                <?php foreach ($timetable as $slot): ?>
-                    <div class="timetable-card">
-                        <div class="period-header">
-                            <span class="period-number">Period <?php echo $slot['period_number']; ?></span>
-                            <span class="time-badge">
-                                <?php echo date('g:i A', strtotime($slot['start_time'])); ?> - 
-                                <?php echo date('g:i A', strtotime($slot['end_time'])); ?>
-                            </span>
-                        </div>
-                        
-                        <div class="subject-info">
-                            <h3><?php echo htmlspecialchars($slot['subject_name']); ?></h3>
-                            <div>
-                                <span class="course-badge"><?php echo htmlspecialchars($slot['course_name']); ?> - Sem <?php echo $slot['semester']; ?></span>
-                                <span class="course-badge">Code: <?php echo htmlspecialchars($slot['subject_code']); ?></span>
-                            </div>
-                            <div class="student-count">
-                                👥 <?php echo $slot['total_students']; ?> students enrolled
-                            </div>
-                        </div>
-                        
-                        <?php if ($slot['marked_count'] > 0): ?>
-                            <div class="attendance-status status-marked">
-                                ✓ Attendance marked for <?php echo $slot['marked_count']; ?> students
-                            </div>
-                        <?php else: ?>
-                            <div class="attendance-status status-pending">
-                                ⏳ Attendance not marked yet
-                            </div>
-                        <?php endif; ?>
-                        
-                        <a href="mark_attendance.php?subject_id=<?php echo $slot['subject_id']; ?>&course_id=<?php echo $slot['course_id']; ?>&semester=<?php echo $slot['semester']; ?>&period=<?php echo $slot['period_number']; ?>" 
-                           class="btn btn-primary" style="margin-top: 15px;">
-                            <?php echo ($slot['marked_count'] > 0) ? 'Update Attendance' : 'Mark Attendance'; ?>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Period & Time</th>
+                                <th>Subject & Code</th>
+                                <th>Class Info</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($timetable as $slot): ?>
+                                <tr>
+                                    <td>
+                                        <span class="badge" style="background: #eef2f7; color: #333;">Period <?php echo $slot['period_number']; ?></span><br>
+                                        <small style="color: #777;">
+                                            <?php echo date('g:i A', strtotime($slot['start_time'])); ?> - 
+                                            <?php echo date('g:i A', strtotime($slot['end_time'])); ?>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo htmlspecialchars($slot['subject_name']); ?></strong><br>
+                                        <small style="color: #666;"><?php echo htmlspecialchars($slot['subject_code']); ?></small>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($slot['course_name']); ?><br>
+                                        <small>Semester <?php echo $slot['semester']; ?></small>
+                                    </td>
+                                    <td>
+                                        <?php if ($slot['marked_count'] > 0): ?>
+                                            <span class="badge badge-success">✓ Marked (<?php echo $slot['marked_count']; ?>)</span>
+                                        <?php else: ?>
+                                            <span class="badge badge-warning">⏳ Pending</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="mark_attendance.php?subject_id=<?php echo $slot['subject_id']; ?>&course_id=<?php echo $slot['course_id']; ?>&semester=<?php echo $slot['semester']; ?>&period=<?php echo $slot['period_number']; ?>" 
+                                           class="btn btn-primary" style="padding: 5px 10px; font-size: 13px;">
+                                            <?php echo ($slot['marked_count'] > 0) ? 'Update' : 'Mark Attendance'; ?>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php else: ?>
-                <div class="no-classes-today">
-                    <h3>🎉 No classes scheduled for today!</h3>
-                    <p>Enjoy your free time.</p>
+                <div style="text-align: center; padding: 40px; color: #999;">
+                    <h3>No classes scheduled for today.</h3>
                 </div>
             <?php endif; ?>
         </div>
     </div>
+
+    <footer class="college-footer">
+        <strong>© 2026 Karpagam College of Arts and Science</strong>
+        Department of BSc Computer Science | Attendance Management System
+    </footer>
+
 </body>
 </html>

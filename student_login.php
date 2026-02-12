@@ -53,39 +53,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login - Attendance Management System</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Student Login - Karpagam College of Arts and Science</title>
+    <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="login-card">
+
+    <header class="college-header">
+        <div class="header-content">
+            <div class="brand-details">
+                <span class="college-name">Karpagam College of Arts and Science</span>
+                <span class="dept-name">Department of BSc Computer Science</span>
+            </div>
+            <div class="system-title">Attendance Management System</div>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-box">
             <div class="login-header">
-                <h1>Student Portal</h1>
+                <img src="Logo2.png" alt="College Logo" class="login-logo">
+                <h2>Student Portal</h2>
                 <p>Sign in to view your attendance</p>
             </div>
             
             <?php if ($error): ?>
-                <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+                <div class="alert alert-danger" style="color: red; margin-bottom: 15px; text-align: center; font-size: 14px;">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
             <?php endif; ?>
             
-            <form method="POST" action="" class="login-form">
+            <form method="POST" action="">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required autofocus>
+                    <input type="text" id="username" name="username" class="form-control" required autofocus placeholder="Enter your ID">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" class="form-control" required placeholder="Enter your password">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             
-            <div class="login-footer">
-                <a href="index.php" class="link">← Back to Home</a>
+            <div class="links" style="text-align: center; margin-top: 20px;">
+                <a href="index.php" style="font-size: 13px;">← Back to Home</a>
             </div>
         </div>
     </div>
+
+    <footer class="college-footer">
+        <strong>© 2026 Karpagam College of Arts and Science</strong>
+        Department of BSc Computer Science | Attendance Management System
+    </footer>
+
 </body>
 </html>

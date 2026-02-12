@@ -95,119 +95,151 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard - Attendance Management System</title>
+    <title>Student Dashboard - Karpagam College</title>
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <header class="college-header">
+        <div class="header-content">
+            <div class="brand-section">
+                <img src="Logo.png" alt="College Logo" class="college-logo">
+                <div class="brand-details">
+                    <span class="college-name">Karpagam College of Arts and Science</span>
+                    <span class="dept-name">Department of BSc Computer Science</span>
+                </div>
+            </div>
+            <div class="system-title">Attendance Management System</div>
+        </div>
+    </header>
+
     <nav class="navbar">
         <div class="nav-container">
-            <h2>Attendance Management System</h2>
-            <div class="nav-right">
-                <span class="user-name">Welcome, <?php echo htmlspecialchars($student_name); ?></span>
-                <a href="logout.php" class="btn btn-secondary">Logout</a>
-            </div>
+            <div class="user-welcome">Welcome, <strong><?php echo htmlspecialchars($student_name); ?></strong> (Student)</div>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="dashboard-header">
-            <h1>Student Dashboard</h1>
-            <p>Track your attendance and performance</p>
+        <div class="dashboard-header" style="margin-top: 20px; margin-bottom: 20px;">
+            <h2>Student Dashboard</h2>
+            <p style="color: #666;">Track your academic attendance and performance</p>
         </div>
 
         <?php if ($student_id): ?>
+            <!-- Student Profile Header -->
             <div class="student-header">
-                <h2><?php echo htmlspecialchars($student_name); ?></h2>
-                <div class="student-info">
-                    <span class="info-badge">📝 Roll: <?php echo htmlspecialchars($roll_number); ?></span>
-                    <span class="info-badge">🎓 <?php echo htmlspecialchars($course_name); ?></span>
-                    <span class="info-badge">📖 Semester <?php echo $semester; ?></span>
-                </div>
-            </div>
-
-            <!-- Overall Attendance -->
-            <div class="overall-section">
-                <h2>Overall Attendance</h2>
-                <div class="overall-percentage"><?php echo $overall_stats['percentage']; ?>%</div>
-                <div><?php echo $overall_stats['present']; ?> / <?php echo $overall_stats['total']; ?> classes attended</div>
-                <?php if ($overall_stats['percentage'] >= 75): ?>
-                    <div style="margin-top: 15px; font-size: 1.1em;">✓ You meet the minimum 75% requirement</div>
-                <?php else: ?>
-                    <div style="margin-top: 15px; font-size: 1.1em;">⚠️ Below minimum 75% requirement</div>
-                <?php endif; ?>
-            </div>
-
-            <!-- Subject-wise Attendance -->
-            <div class="card">
-                <h2>Subject-wise Attendance</h2>
-                <?php if (count($subject_stats) > 0): ?>
-                    <?php foreach ($subject_stats as $subject): ?>
-                        <?php 
-                        $perc_class = $subject['percentage'] >= 75 ? 'percentage-good' : 
-                                     ($subject['percentage'] >= 60 ? 'percentage-medium' : 'percentage-low');
-                        ?>
-                        <div class="subject-card">
-                            <div class="subject-header">
-                                <div>
-                                    <div class="subject-name"><?php echo htmlspecialchars($subject['subject_name']); ?></div>
-                                    <div style="color: #666; margin-top: 5px;">Code: <?php echo htmlspecialchars($subject['subject_code']); ?></div>
-                                </div>
-                                <div class="percentage-circle <?php echo $perc_class; ?>">
-                                    <?php echo $subject['percentage']; ?>%
-                                </div>
-                            </div>
-                            <div class="attendance-detail">
-                                <span>📊 <?php echo $subject['present_count']; ?> / <?php echo $subject['total_classes']; ?> classes</span>
-                                <span>✓ <?php echo $subject['present_count']; ?> Present</span>
-                                <span>✗ <?php echo ($subject['total_classes'] - $subject['present_count']); ?> Absent</span>
-                            </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <h2 style="color: white; margin-bottom: 10px; font-size: 28px;"><?php echo htmlspecialchars($student_name); ?></h2>
+                        <div class="student-info">
+                            <span class="info-badge">📝 Roll No: <?php echo htmlspecialchars($roll_number); ?></span>
+                            <span class="info-badge">🎓 <?php echo htmlspecialchars($course_name); ?></span>
+                            <span class="info-badge">📖 Semester <?php echo $semester; ?></span>
                         </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="no-data">No attendance records yet. Attendance will appear once your teachers mark it.</p>
-                <?php endif; ?>
-            </div>
-
-            <!-- Recent Attendance -->
-            <?php if (count($recent_records) > 0): ?>
-                <div class="card">
-                    <h2>Recent Attendance Records</h2>
-                    <div id="scrollable-attendance-table" class="attendance-table-wrapper">
-                        <table class="attendance-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Day</th>
-                                    <th>Period</th>
-                                    <th>Subject</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($recent_records as $record): ?>
-                                    <tr>
-                                        <td><?php echo date('M j, Y', strtotime($record['date'])); ?></td>
-                                        <td><?php echo $record['day_of_week']; ?></td>
-                                        <td><span class="period-badge">Period <?php echo $record['period_number']; ?></span></td>
-                                        <td><?php echo htmlspecialchars($record['subject_name']); ?></td>
-                                        <td>
-                                            <span class="status-badge status-<?php echo $record['status']; ?>">
-                                                <?php echo ucfirst($record['status']); ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                    </div>
+                    <div class="overall-percentage" style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; font-weight: bold; border: 4px solid rgba(255,255,255,0.4);">
+                        <?php echo $overall_stats['percentage']; ?>%
                     </div>
                 </div>
-            <?php endif; ?>
+            </div>
+
+            <!-- Overall Stats Summary -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3><?php echo $overall_stats['present']; ?> / <?php echo $overall_stats['total']; ?></h3>
+                    <p>Classes Attended</p>
+                </div>
+                <div class="summary-card">
+                    <h3><?php echo count($subject_stats); ?></h3>
+                    <p>Total Subjects</p>
+                </div>
+                <div class="summary-card">
+                    <?php if ($overall_stats['percentage'] >= 75): ?>
+                        <h3 style="color: #28a745;">Eligible</h3>
+                        <p>Exam Status</p>
+                    <?php else: ?>
+                        <h3 style="color: #dc3545;">Shortage</h3>
+                        <p>Exam Status</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <!-- Recent Attendance Table -->
+                <div class="data-table-container">
+                    <h3 style="color: #003366; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Recent Attendance Records</h3>
+                    
+                    <?php if (count($recent_records) > 0): ?>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Day/Period</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recent_records as $record): ?>
+                                        <tr>
+                                            <td><?php echo date('M j, Y', strtotime($record['date'])); ?></td>
+                                            <td>
+                                                <small style="color: #666;"><?php echo $record['day_of_week']; ?></small><br>
+                                                <span class="badge" style="background: #eef2f7; color: #333;">Period <?php echo $record['period_number']; ?></span>
+                                            </td>
+                                            <td>
+                                                <strong><?php echo htmlspecialchars($record['subject_name']); ?></strong><br>
+                                                <small style="color: #999;"><?php echo htmlspecialchars($record['subject_code']); ?></small>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-<?php echo ($record['status'] == 'present' ? 'success' : 'danger'); ?>">
+                                                    <?php echo ucfirst($record['status']); ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <p class="no-data">No attendance records found.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Subject Wise Short List -->
+                <div class="data-table-container">
+                     <h3 style="color: #003366; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Subject Summary</h3>
+                     <?php foreach ($subject_stats as $subject): ?>
+                        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <strong style="font-size: 14px;"><?php echo htmlspecialchars($subject['subject_name']); ?></strong>
+                                <span style="font-weight: bold; color: <?php echo ($subject['percentage'] >= 75 ? '#28a745' : '#dc3545'); ?>"><?php echo $subject['percentage']; ?>%</span>
+                            </div>
+                            <div style="background: #e9ecef; height: 6px; border-radius: 3px; overflow: hidden;">
+                                <div style="background: <?php echo ($subject['percentage'] >= 75 ? '#28a745' : '#dc3545'); ?>; width: <?php echo $subject['percentage']; ?>%; height: 100%;"></div>
+                            </div>
+                            <div style="font-size: 12px; color: #777; margin-top: 3px;">
+                                <?php echo $subject['present_count']; ?> / <?php echo $subject['total_classes']; ?> classes
+                            </div>
+                        </div>
+                     <?php endforeach; ?>
+                </div>
+            </div>
+
         <?php else: ?>
             <div class="card">
-                <p class="no-data">You are not enrolled in any course yet. Please contact the administrator.</p>
+                <p class="no-data">You are not enrolled in any course yet.</p>
             </div>
         <?php endif; ?>
     </div>
+
+    <footer class="college-footer">
+        <strong>© 2026 Karpagam College of Arts and Science</strong>
+        Department of BSc Computer Science | Attendance Management System
+    </footer>
+
 </body>
 </html>
