@@ -156,6 +156,13 @@ $conn->close();
                     <p>Total Subjects</p>
                 </div>
                 <div class="summary-card">
+                    <h3 style="color: <?php echo ($overall_stats['percentage'] >= 75 ? '#28a745' : '#dc3545'); ?>">
+                        <?php echo $overall_stats['percentage']; ?>%
+                    </h3>
+                    <p>Total Percentage</p>
+                </div>
+                <!-- Exam Eligibility Card -->
+                <div class="summary-card">
                     <?php if ($overall_stats['percentage'] >= 75): ?>
                         <h3 style="color: #28a745;">Eligible</h3>
                         <p>Exam Status</p>
