@@ -117,7 +117,7 @@ a:hover {
    Header & Branding
    =========================== */
 .college-header {
-    background: var(--white);
+    background: var(--primary);
     border-bottom: 4px solid var(--primary);
     padding: 15px 0;
     box-shadow: var(--shadow);
@@ -151,14 +151,14 @@ a:hover {
 .college-name {
     font-size: 24px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--white);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .dept-name {
     font-size: 14px;
-    color: var(--text-light);
+    color: var(--white);
     font-weight: 500;
     border-top: 1px solid var(--border);
     padding-top: 4px;
@@ -498,7 +498,7 @@ a:hover {
     color: #777;
     font-size: 12px;
     border-top: 1px solid var(--border);
-    margin-top: 40px;
+    margin-top: 97px;
     background: var(--bg-card);
 }
 
