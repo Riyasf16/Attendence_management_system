@@ -1,0 +1,411 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset="utf-8">
+    <title>Final Project Report</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            margin: 1in;
+            text-align: justify;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        h1 { font-size: 16pt; text-transform: uppercase; }
+        h2 { font-size: 14pt; text-transform: uppercase; }
+        h3 { font-size: 12pt; text-align: left; }
+        
+        p { margin-bottom: 15px; }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th { background-color: #f2f2f2; }
+        
+        .page-break { page-break-after: always; }
+        .center { text-align: center; }
+        .bold { font-weight: bold; }
+        
+        /* Cover Page Specifics */
+        .cover-page { text-align: center; line-height: 2; margin-top: 100px; }
+        .cover-title { font-size: 20pt; font-weight: bold; margin-bottom: 50px; }
+        .cover-sub { font-size: 14pt; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="cover-page">
+        <div class="cover-title">ATTENDANCE MANAGEMENT SYSTEM</div>
+        <div class="cover-sub">A Project Report Submitted to</div>
+        <div class="bold" style="font-size: 16pt;">KARPAGAM COLLEGE OF ARTS AND SCIENCE</div>
+        <div>(Autonomous)</div>
+        <br>
+        <div>In partial fulfillment of the requirements for the award of the degree of</div>
+        <div class="bold" style="font-size: 14pt;">BACHELOR OF SCIENCE<br>IN<br>COMPUTER SCIENCE</div>
+        <br>
+        <div>Submitted by</div>
+        <div class="bold">[YOUR NAME]</div>
+        <div class="bold">(Reg. No: [YOUR REGISTER NUMBER])</div>
+        <br>
+        <div>Under the Guidance of</div>
+        <div class="bold">[GUIDE NAME]</div>
+        <div>Assistant Professor, Department of Computer Science</div>
+        <br><br>
+        <div class="bold">DEPARTMENT OF COMPUTER SCIENCE</div>
+        <div class="bold">KARPAGAM COLLEGE OF ARTS AND SCIENCE</div>
+        <div class="bold">COIMBATORE – 641 021</div>
+        <br>
+        <div class="bold">[MONTH & YEAR]</div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- BONAFIDE -->
+    <h2>BONAFIDE CERTIFICATE</h2>
+    <p>This is to certify that the project report entitled <b>"ATTENDANCE MANAGEMENT SYSTEM"</b> is a bonafide work done by <b>[YOUR NAME] (Reg. No: [YOUR REGISTER NUMBER])</b> in partial fulfillment of the requirements for the award of the degree of <b>BACHELOR OF SCIENCE IN COMPUTER SCIENCE</b> during the academic year 2025-2026.</p>
+    <br><br><br>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="float: left;"><b>Head of the Department</b></div>
+        <div style="float: right;"><b>Staff Guide</b></div>
+    </div>
+    <div style="clear: both;"></div>
+    <br><br><br>
+    <p>Submitted for the Viva-Voce examination held on ______________</p>
+    <br><br>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="float: left;"><b>Internal Examiner</b></div>
+        <div style="float: right;"><b>External Examiner</b></div>
+    </div>
+    <div style="clear: both;"></div>
+
+    <div class="page-break"></div>
+
+    <!-- DECLARATION -->
+    <h2>DECLARATION</h2>
+    <p>I, <b>[YOUR NAME]</b>, hereby declare that the project report entitled <b>"ATTENDANCE MANAGEMENT SYSTEM"</b> submitted to <b>Karpagam College of Arts and Science</b>, in partial fulfillment of the requirements for the award of the degree of <b>BACHELOR OF SCIENCE IN COMPUTER SCIENCE</b>, is a record of original work done by me under the supervision and guidance of <b>[GUIDE NAME]</b>, Assistant Professor, Department of Computer Science.</p>
+    <br><br>
+    <p>Place: Coimbatore</p>
+    <p>Date: </p>
+    <br>
+    <div style="text-align: right;"><b>Signature of the Candidate</b></div>
+
+    <div class="page-break"></div>
+
+    <!-- ACKNOWLEDGEMENT -->
+    <h2>ACKNOWLEDGEMENT</h2>
+    <p>First and foremost, I thank the <b>Almighty God</b> for his blessings throughout this project work.</p>
+    <p>I express my sincere thanks to our Principal, <b>[PRINCIPAL NAME]</b>, and our Head of the Department, <b>[HOD NAME]</b>, for providing the necessary facilities to complete this project.</p>
+    <p>I am extremely grateful to my guide, <b>[GUIDE NAME]</b>, for their valuable guidance, encouragement, and support during the course of this project.</p>
+    <p>Finally, I thank my parents and friends who helped me directly and indirectly to complete this project successfully.</p>
+
+    <div class="page-break"></div>
+
+    <!-- ABSTRACT -->
+    <h2>ABSTRACT</h2>
+    <p>The "Attendance Management System" is a web-based application developed to simplify the daily attendance process in our college. Traditional paper-based attendance registers are difficult to maintain and time-consuming. This project aims to computerize the entire process.</p>
+    <p>The system has two main users: Teachers and Students. Teachers can login, view their assigned subjects, and mark attendance for students. The system automatically calculates the percentage. Students can login to their dashboard to view their total attendance percentage, subject-wise breakdown, and check if they are eligible for exams (above 75%).</p>
+    <p>This project is built using HTML and CSS for the design, PHP for the logic, and MySQL as the database to store student and attendance records. It ensures accuracy and saves a lot of time for both staff and students.</p>
+
+    <div class="page-break"></div>
+
+    <!-- TABLE OF CONTENTS -->
+    <h2>TABLE OF CONTENTS</h2>
+    <p>1. CHAPTER 1: INTRODUCTION</p>
+    <p>2. CHAPTER 2: SYSTEM STUDY</p>
+    <p>3. CHAPTER 3: SYSTEM REQUIREMENTS</p>
+    <p>4. CHAPTER 4: SYSTEM DESIGN</p>
+    <p>5. CHAPTER 5: DATABASE DESIGN</p>
+    <p>6. CHAPTER 6: MODULE DESCRIPTION</p>
+    <p>7. CHAPTER 7: USER INTERFACE DESIGN</p>
+    <p>8. CHAPTER 8: IMPLEMENTATION</p>
+    <p>9. CHAPTER 9: TESTING</p>
+    <p>10. CHAPTER 10: RESULTS AND DISCUSSION</p>
+    <p>11. CHAPTER 11: CONCLUSION AND FUTURE WORK</p>
+    <p>12. REFERENCES</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 1 -->
+    <h2>CHAPTER 1: INTRODUCTION</h2>
+    <h3>Introduction</h3>
+    <p>In today's digital world, everything is becoming automated. Educational institutions like ours often face difficulties in maintaining paper-based attendance registers. It leads to paperwork, calculation errors, and waste of time. The <b>Attendance Management System</b> is a solution to these problems. It allows staff to mark attendance online and students to view their status instantly.</p>
+    
+    <h3>Objectives of the Project</h3>
+    <ul>
+        <li>To replace the manual attendance register with a computerized system.</li>
+        <li>To calculate attendance percentage automatically to avoid errors.</li>
+        <li>To provide separate logins for teachers and students.</li>
+        <li>To help students check their exam eligibility status (Eligible/Shortage) easily.</li>
+        <li>To save time during class hours.</li>
+    </ul>
+
+    <h3>Scope of the Project</h3>
+    <p>The project is currently designed for the Computer Science department. It covers student details, subject allocation, and daily attendance recording. In the future, it can be expanded to the entire college, including SMS alerts to parents for absentees.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 2 -->
+    <h2>CHAPTER 2: SYSTEM STUDY</h2>
+    <h3>Existing System</h3>
+    <p>Currently, the attendance is maintained manually in a green logbook.</p>
+    <ul>
+        <li><b>Disadvantages:</b></li>
+        <ul>
+            <li>Teachers have to carry the register to every class.</li>
+            <li>Calculating monthly and semester-wise percentage is manual and prone to mistakes.</li>
+            <li>Students don't know their current percentage unless the teacher tells them.</li>
+            <li>Registers can get damaged or lost.</li>
+        </ul>
+    </ul>
+
+    <h3>Proposed System</h3>
+    <p>The proposed system is a web application where data is stored in a central database.</p>
+    <ul>
+        <li><b>Advantages:</b></li>
+        <ul>
+            <li>Attendance can be marked from any computer in the lab or staff room.</li>
+            <li>Calculation is automatic and instant.</li>
+            <li>Students can login and check their own attendance anytime.</li>
+            <li>Data is safe and secure in the MySQL database.</li>
+            <li>Reports are generated with a single click.</li>
+        </ul>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 3 -->
+    <h2>CHAPTER 3: SYSTEM REQUIREMENTS</h2>
+    <p>To run this project, the following hardware and software are required.</p>
+    
+    <h3>Hardware Requirements</h3>
+    <ul>
+        <li><b>Processor:</b> Intel Core i3 or higher</li>
+        <li><b>RAM:</b> 4GB or higher</li>
+        <li><b>Hard Disk:</b> 100GB min</li>
+        <li><b>Monitor:</b> Standard LED/LCD Monitor</li>
+        <li><b>Input Devices:</b> Keyboard and Mouse</li>
+    </ul>
+
+    <h3>Software Requirements</h3>
+    <ul>
+        <li><b>Operating System:</b> Windows 10 / 11</li>
+        <li><b>Front End:</b> HTML, CSS, JavaScript</li>
+        <li><b>Back End:</b> PHP (Hypertext Preprocessor)</li>
+        <li><b>Database:</b> MySQL</li>
+        <li><b>Local Server:</b> XAMPP (Apache)</li>
+        <li><b>Browser:</b> Google Chrome or any standard web browser</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 4 -->
+    <h2>CHAPTER 4: SYSTEM DESIGN</h2>
+    <h3>System Architecture</h3>
+    <p>The system follows a standard client-server architecture.</p>
+    <ol>
+        <li><b>Client:</b> The web browser (Chrome/Edge) where the user interacts with the UI.</li>
+        <li><b>Server:</b> The Apache server (XAMPP) processes the PHP scripts.</li>
+        <li><b>Database:</b> MySQL stores all the user and attendance data.</li>
+    </ol>
+
+    <h3>Entity Relationship Diagram (ER Diagram)</h3>
+    <p>The main entities in my project are:</p>
+    <ul>
+        <li><b>Users:</b> Stores login info for teachers and students.</li>
+        <li><b>Students:</b> Links to the user table and stores personal details.</li>
+        <li><b>Courses/Subjects:</b> Stores the academic curriculum.</li>
+        <li><b>Attendance:</b> Connects students, subjects, and dates.</li>
+    </ul>
+
+    <h3>Data Flow Diagram (DFD)</h3>
+    <ul>
+        <li><b>User</b> -> Login -> <b>System</b> -> Validate -> <b>Dashboard</b></li>
+        <li><b>Teacher</b> -> Select Class -> Mark Attendance -> <b>Database</b></li>
+        <li><b>Student</b> -> Request Status -> <b>System</b> -> Fetch Data -> <b>Show Percentage</b></li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 5 -->
+    <h2>CHAPTER 5: DATABASE DESIGN</h2>
+    <h3>Database Schema</h3>
+    <p>The database name used is <code>attendance_db</code>.</p>
+
+    <h3>Table Structures</h3>
+    <p><b>1. Table: users</b></p>
+    <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>id</td><td>INT</td><td>Primary Key</td></tr>
+        <tr><td>username</td><td>VARCHAR</td><td>Login ID</td></tr>
+        <tr><td>password</td><td>VARCHAR</td><td>Hashed Password</td></tr>
+        <tr><td>role</td><td>ENUM</td><td>'teacher' or 'student'</td></tr>
+    </table>
+
+    <p><b>2. Table: attendance</b></p>
+    <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>id</td><td>INT</td><td>Primary Key</td></tr>
+        <tr><td>student_id</td><td>INT</td><td>Link to student</td></tr>
+        <tr><td>subject_id</td><td>INT</td><td>Link to subject</td></tr>
+        <tr><td>date</td><td>DATE</td><td>Date of class</td></tr>
+        <tr><td>status</td><td>ENUM</td><td>'present' or 'absent'</td></tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 6 -->
+    <h2>CHAPTER 6: MODULE DESCRIPTION</h2>
+    
+    <h3>Login Module</h3>
+    <p>This is the entry point. It accepts a username and password. The system checks the <code>users</code> table. If the role is 'teacher', it redirects to <code>teacher_dashboard.php</code>. If 'student', it goes to <code>student_dashboard.php</code>.</p>
+
+    <h3>Admin Module</h3>
+    <p>(Handled via database directly for this project scope) - Creates new users, courses, and subjects.</p>
+
+    <h3>Teacher Module</h3>
+    <p>Teachers can see the subjects assigned to them. They can select a subject, date, and period to mark attendance for all enrolled students.</p>
+
+    <h3>Student Module</h3>
+    <p>Students can view their profile, roll number, and course. The main feature is the "Total Percentage" card which tells them if they are eligible for exams.</p>
+
+    <h3>Attendance Module</h3>
+    <p>This is the core logic. It takes the input from the teacher (Present/Absent checkboxes) and inserts records into the MySQL database. It creates a new row for every student for that period.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 7 -->
+    <h2>CHAPTER 7: USER INTERFACE DESIGN</h2>
+    <p>The UI is designed using HTML and CSS. I have used the college color theme (Blue and White) to make it look professional.</p>
+
+    <h3>Login Page</h3>
+    <p>Has two buttons: "Faculty Login" and "Student Login". It uses a background image of the college campus.</p>
+
+    <h3>Dashboard</h3>
+    <ul>
+        <li><b>Teacher Dashboard:</b> Shows cards for "Total Students" and "Total Classes".</li>
+        <li><b>Student Dashboard:</b> Shows "Classes Attended", "Total Percentage", and "Exam Status" (Green for Eligible, Red for Shortage).</li>
+    </ul>
+
+    <h3>Attendance Entry Page</h3>
+    <p>A simple list of students with checkboxes. The teacher just needs to uncheck the absent students and click "Submit".</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 8 -->
+    <h2>CHAPTER 8: IMPLEMENTATION</h2>
+    
+    <h3>Backend Implementation</h3>
+    <p>The backend is written in <b>PHP</b>. I used <code>mysqli</code> for connecting to the database.</p>
+
+    <h3>Database Connectivity</h3>
+    <p>All database queries are executed using SQL.</p>
+    <ul>
+        <li><code>SELECT</code> is used to fetch login details and reports.</li>
+        <li><code>INSERT</code> is used to save attendance.</li>
+    </ul>
+
+    <h3>Session Management</h3>
+    <p>I used PHP Sessions (<code>session_start()</code>) to ensure security. If a user tries to open the dashboard without logging in, the system checks the session and redirects them back to the login page.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 9 -->
+    <h2>CHAPTER 9: TESTING</h2>
+    
+    <h3>Testing Strategy</h3>
+    <p>I performed <b>Unit Testing</b> and <b>Integration Testing</b>. I tested each page separately to make sure there were no errors.</p>
+
+    <h3>Test Cases</h3>
+    <p><b>Test Case 1: Login</b></p>
+    <ul>
+        <li>Input: Correct username/password (<code>teacher_fine</code>/<code>teacher123</code>)</li>
+        <li>Expected Output: Redirect to specific dashboard.</li>
+        <li>Actual Result: Success.</li>
+    </ul>
+
+    <p><b>Test Case 2: Mark Attendance</b></p>
+    <ul>
+        <li>Input: Select students and click Submit.</li>
+        <li>Expected Output: "Attendance marked successfully" message.</li>
+        <li>Actual Result: Success (Data visible in database).</li>
+    </ul>
+
+    <p><b>Test Case 3: Invalid Login</b></p>
+    <ul>
+        <li>Input: Wrong password.</li>
+        <li>Expected Output: "Invalid username or password" error.</li>
+        <li>Actual Result: Success.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 10 -->
+    <h2>CHAPTER 10: RESULTS AND DISCUSSION</h2>
+    
+    <h3>Results</h3>
+    <p>The project was successfully designed and developed.</p>
+    <ul>
+        <li>Teachers can mark attendance in less than 2 minutes.</li>
+        <li>Students can see their live percentage instantly.</li>
+        <li>The system accurately calculates eligibility (>75%).</li>
+    </ul>
+
+    <h3>Discussion</h3>
+    <p>During the development, I faced challenges in calculating the percentage for individual subjects. I solved this by using SQL <code>GROUP BY</code> queries. The system serves the purpose well for our department.</p>
+
+    <div class="page-break"></div>
+
+    <!-- CHAPTER 11 -->
+    <h2>CHAPTER 11: CONCLUSION AND FUTURE WORK</h2>
+    
+    <h3>Advantages</h3>
+    <ol>
+        <li><b>Eco-friendly:</b> Reduces paper usage.</li>
+        <li><b>Accessibility:</b> Can be accessed from anywhere in the college.</li>
+        <li><b>Speed:</b> Much faster than calling out names and writing in a book.</li>
+    </ol>
+
+    <h3>Limitations</h3>
+    <ol>
+        <li>Currently, it only works on the Local Area Network (LAN) / XAMPP.</li>
+        <li>If the server is down, attendance cannot be marked.</li>
+    </ol>
+
+    <h3>Conclusion</h3>
+    <p>The "Attendance Management System" is a useful tool for Karpagam College. It meets all the objectives set at the beginning of the project. It simplifies the work of our professors and provides transparency to students. I learned a lot about PHP, MySQL, and web development while building this project.</p>
+
+    <div class="page-break"></div>
+
+    <!-- REFERENCES -->
+    <h2>REFERENCES / BIBLIOGRAPHY</h2>
+    <ol>
+        <li><b>Text Books:</b>
+            <ul>
+                <li>"Web Technologies" by Uttam K. Roy.</li>
+                <li>"PHP and MySQL Web Development" by Luke Welling.</li>
+            </ul>
+        </li>
+        <li><b>Websites:</b>
+            <ul>
+                <li>W3Schools (www.w3schools.com) - For HTML/CSS reference.</li>
+                <li>PHP.net (www.php.net) - For PHP documentation.</li>
+                <li>Stack Overflow - For error solving.</li>
+            </ul>
+        </li>
+    </ol>
+
+</body>
+</html>
