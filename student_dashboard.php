@@ -53,12 +53,30 @@ if (!$student_data) {
     $stmt->close();
     
     // Get overall attendance statistics
+    // Get overall attendance statistics (Day-based)
+    // Logic: 
+    // - Absent <= 1 period: Full Day (1)
+    // - Absent == 2 periods: Half Day (0.5)
+    // - Absent > 2 periods: Absent (0)
     $stmt = $conn->prepare("SELECT 
         COUNT(*) as total,
-        SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) as present,
-        ROUND(SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as percentage
-    FROM attendance
-    WHERE student_id = ?");
+        SUM(daily_score) as present,
+        ROUND(SUM(daily_score) * 100.0 / COUNT(*), 2) as percentage
+    FROM (
+        SELECT 
+            date,
+            SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) as periods_present,
+            COUNT(*) as total_periods,
+            (COUNT(*) - SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END)) as periods_absent,
+            CASE 
+                WHEN (COUNT(*) - SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END)) <= 1 THEN 1.0
+                WHEN (COUNT(*) - SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END)) = 2 THEN 0.5
+                ELSE 0.0
+            END as daily_score
+        FROM attendance
+        WHERE student_id = ?
+        GROUP BY date
+    ) as daily_stats");
     $stmt->bind_param("i", $student_id);
     $stmt->execute();
     $overall_stats = $stmt->get_result()->fetch_assoc();
@@ -148,8 +166,8 @@ $conn->close();
             <!-- Overall Stats Summary -->
             <div class="summary-cards">
                 <div class="summary-card">
-                    <h3><?php echo $overall_stats['present']; ?> / <?php echo $overall_stats['total']; ?></h3>
-                    <p>Classes Attended</p>
+                    <h3><?php echo floatval($overall_stats['present']); ?> / <?php echo $overall_stats['total']; ?></h3>
+                    <p>Days Attended</p>
                 </div>
                 <div class="summary-card">
                     <h3><?php echo count($subject_stats); ?></h3>
